@@ -8,6 +8,11 @@ namespace Commander.Data
 {
     public class MockCommanderRepo : ICommanderRepo
     {
+        public void CreateCommmand(Command cmd)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Command> GetAllCommands()
         {
             var commands = new List<Command>
@@ -23,6 +28,16 @@ namespace Commander.Data
         public Command GetCommandById(int id)
         {
             return new Command { Id = 0, HowTo = "Boil an egg", Line = "Boil Water", Platform = "Klette & Pan" };
+        }
+
+        public bool SaveChanges()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateCommand(Command cmd)
+        {
+            //Nothing
         }
     }
 }

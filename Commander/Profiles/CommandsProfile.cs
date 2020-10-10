@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Commander.DTOs;
 using Commander.Models;
+using System.Runtime.InteropServices;
 
 namespace Commander.Profiles
 {
@@ -8,7 +9,14 @@ namespace Commander.Profiles
     {
         public CommandsProfile()
         {
-            CreateMap<Command, CommandReadDTO>();
+            //Source -> Target
+            CreateMap<Command, CommandReadDto>();
+
+            CreateMap<CommandCreateDto, Command>();
+
+            CreateMap<CommandUpdateDto, Command>();
+
+            CreateMap<Command, CommandUpdateDto>();
         }
     }
 }

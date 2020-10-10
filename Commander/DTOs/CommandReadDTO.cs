@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Commander.DTOs
 {
-    public class CommandReadDTO
+    public class CommandReadDto
     {   
         public int Id { get; set; }
         public string HowTo { get; set; }
