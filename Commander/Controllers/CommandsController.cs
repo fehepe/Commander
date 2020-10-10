@@ -10,7 +10,7 @@ namespace Commander.Controllers
 {
 
     [Route("api/commands")]
-    [ApiController] 
+    [ApiController]
     public class CommandsController : ControllerBase
     {
         private readonly ICommanderRepo _repository;
@@ -21,7 +21,7 @@ namespace Commander.Controllers
             _repository = repository;
             _mapper = mapper;
         }
-        
+
         //private readonly MockCommanderRepo _repository = new MockCommanderRepo();
 
         //GET api/commmands
@@ -34,7 +34,7 @@ namespace Commander.Controllers
         }
 
         //GET api/commmands/{id}
-        [HttpGet("{id}",Name = "GetCommandById")]
+        [HttpGet("{id}", Name = "GetCommandById")]
         public ActionResult<CommandReadDto> GetCommandById(int id)
         {
             var commandItem = _repository.GetCommandById(id);
@@ -43,7 +43,7 @@ namespace Commander.Controllers
                 return Ok(_mapper.Map<CommandReadDto>(commandItem));
             }
             return NotFound();
-            
+
         }
 
         //POST api/commmands
@@ -57,7 +57,7 @@ namespace Commander.Controllers
 
             var commandReadDto = _mapper.Map<CommandReadDto>(commmandModel);
 
-            return CreatedAtRoute(nameof(GetCommandById), new {Id = commandReadDto.Id}, commandReadDto);
+            return CreatedAtRoute(nameof(GetCommandById), new { Id = commandReadDto.Id }, commandReadDto);
         }
 
         //PUT api/commands/{id}
@@ -109,6 +109,23 @@ namespace Commander.Controllers
             return NoContent();
 
         }
-        
+
+        //DELETE api/commands/{id}
+        [HttpDelete("{id}")]
+        public ActionResult DeleteCommand(int id)
+        {
+            var commandModelFromRepo = _repository.GetCommandById(id);
+
+            if (commandModelFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            _repository.DeleteCommand(commandModelFromRepo);
+
+            _repository.SaveChanges();
+
+            return NoContent();
+        }
     }
 }
